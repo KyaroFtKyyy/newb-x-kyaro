@@ -26,6 +26,9 @@ vec3 colorCorrection(vec3 col) {
   #elif NL_TONEMAP_TYPE == 1
     // exponential tonemap
     col = 1.0-exp(-col*0.8);
+  #elif NL_TONEMAP_TYPE == 5
+    // reinhard v2 tonemap
+    col = col * (1.0 + col / (1.0 + col / 0.5)) /  (1.0 + col);
   #endif
 
   // gamma correction + contrast
